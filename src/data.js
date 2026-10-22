@@ -50,7 +50,7 @@ export const fleet = [
     name: 'Tata Sumo',
     category: 'Comfort on the road',
     description: 'A considered choice for trips where the journey matters as much as the destination.',
-    image: '/images/9b6dcdbf-50d0-4b44-8eb1-4190ad09f211.png',
+    image: '/images/9b6dcbdf-50d0-4b44-8eb1-4190ad09f211.png',
     scene: 'scene-dusk',
     note: 'Arrive feeling refreshed',
   },
