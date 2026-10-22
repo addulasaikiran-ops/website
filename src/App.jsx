@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, CalendarDays, CarFront, Clock3, Fuel, MapPin, Phone, Snowflake, Users, UserRound, BriefcaseBusiness, Truck, MessageCircle, ChevronDown } from 'lucide-react';
 import { business, fleet, towing } from './data.js';
 
@@ -11,6 +11,26 @@ export default function App() {
   const [form, setForm] = useState({ pickup: '', destination: '', date: '', time: '', name: '', phone: '' });
   const [notice, setNotice] = useState('');
   const vehicle = vehicles[active];
+
+  // Keep the current vehicle eager, then warm up adjacent images for faster switching.
+  useEffect(() => {
+    const neighbors = [
+      vehicles[(active + 1) % vehicles.length],
+      vehicles[(active + vehicles.length - 1) % vehicles.length],
+    ];
+    const preload = () => neighbors.forEach((item) => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = item.image;
+    });
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(preload, { timeout: 1200 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+    const id = window.setTimeout(preload, 250);
+    return () => window.clearTimeout(id);
+  }, [active]);
+
   const isTow = mode === 'towing' || active === 6;
   const chooseVehicle = (index) => {
     setActive(index);
@@ -62,7 +82,7 @@ export default function App() {
 
       <div className="hero-car-area" aria-live="polite">
         <div className="car-light-pool" />
-        <img key={vehicle.id} className="premium-car-image" src={vehicle.image} alt={`${vehicle.name} vehicle`} />
+        <img key={vehicle.id} className="premium-car-image" src={vehicle.image} alt={`${vehicle.name} vehicle`} loading="eager" decoding="async" fetchPriority="high" />
         <div className="car-image-shade" />
       </div>
 
