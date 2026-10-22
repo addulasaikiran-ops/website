@@ -9,7 +9,7 @@ export default function ExperienceChrome() {
     const updateProgress = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const progress = max > 0 ? window.scrollY / max : 0;
-      document.documentElement.style.setProperty('--page-progress', String(progress));
+      document.documentElement.style.setProperty('--page-progress', `${progress * 100}%`); document.documentElement.style.setProperty('--page-progress-number', String(progress));
     };
     const onPointer = (event) => {
       if (event.pointerType === 'touch') return;
