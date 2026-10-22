@@ -1,0 +1,75 @@
+export const business = {
+  name: 'Sriram Travels & Towing Services',
+  shortName: 'Sriram Travels',
+  phoneDisplay: '+91 99493 79737',
+  phone: '919949379737',
+  address: 'Door No. 1, 960, RTC Bus Stand Road, Gooty, Andhra Pradesh 515401',
+  city: 'Gooty, Andhra Pradesh',
+  listingUrl: 'https://magicpin.in/Gooty/Gooty/Brand/Sriram-Travels-And-Towing-Services/store/43ab857',
+};
+
+export const fleet = [
+  {
+    id: '01',
+    name: 'Maruti Suzuki Swift Dzire',
+    category: 'Everyday comfort',
+    description: 'A comfortable ride for everyday plans, local errands and journeys made at your own pace.',
+    image: '/images/2d5d60a9-59b3-4b7d-895f-db1390d68c70.png',
+    scene: 'scene-coast',
+    note: 'A thoughtful start to every journey',
+  },
+  {
+    id: '02',
+    name: 'Mahindra Verito',
+    category: 'City & beyond',
+    description: 'A versatile option for getting across town or setting out on a longer road trip.',
+    image: '/images/3b9b868c-d01d-4c02-962b-72f26c59688a.png',
+    scene: 'scene-urban',
+    note: 'Made for the miles ahead',
+  },
+  {
+    id: '03',
+    name: 'Tata Safari',
+    category: 'Family journeys',
+    description: 'Plan a family outing or a weekend away. Ask us which vehicle best suits your group.',
+    image: '/images/3d5edc79-522f-436f-9b51-8be51e91a51c.png',
+    scene: 'scene-hills',
+    note: 'More moments, less fuss',
+  },
+  {
+    id: '04',
+    name: 'Maruti Suzuki Ertiga',
+    category: 'Long-distance travel',
+    description: 'For outstation plans and open-road days, enquire about the right vehicle for your route.',
+    image: '/images/906f800a-e1ed-4846-b223-9dc437802aa4.png',
+    scene: 'scene-studio',
+    note: 'Take the scenic route',
+  },
+  {
+    id: '05',
+    name: 'Tata Sumo',
+    category: 'Comfort on the road',
+    description: 'A considered choice for trips where the journey matters as much as the destination.',
+    image: '/images/9b6dcbdf-50d0-4b44-8eb1-4190ad09f211.png',
+    scene: 'scene-dusk',
+    note: 'Arrive feeling refreshed',
+  },
+  {
+    id: '06',
+    name: 'Force Trax Cruiser',
+    category: 'Your next escape',
+    description: 'Tell us where you want to go and we will help you enquire about a suitable ride.',
+    image: '/images/9babef86-13d4-4d96-ae64-9dfdc5d1b860.png',
+    scene: 'scene-road',
+    note: 'A little further feels good',
+  },
+];
+
+export const towing = {
+  id: '07',
+  name: 'Towing & recovery',
+  category: 'Roadside assistance',
+  description: 'Vehicle trouble can disrupt any plan. Contact Sriram Travels & Towing Services in Gooty to enquire about towing and breakdown recovery assistance.',
+  image: '/images/2f3dafd4-0e15-4e41-94ac-b2b89ffbcf96.png',
+  scene: 'scene-tow',
+};
