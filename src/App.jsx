@@ -190,7 +190,7 @@ export default function App() {
     <FleetSidebar active={active} progress={progress} onSelect={selectVehicle} />
     <main className="page-main">
       <section className="hero-section" id="home">
-        <div className="hero-background"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=90" alt="" fetchPriority="high" /></div>
+        <div className="hero-background"><img src="/images/2d5d60a9-59b3-4b7d-895f-db1390d68c70.png" alt="" fetchPriority="high" /></div>
         <div className="hero-shade" />
         <div className="hero-content"><span className="hero-eyebrow"><span /> A LOCAL NAME. A WIDER ROAD.</span><h1>Go further,<br /><em>beautifully.</em></h1><p>Thoughtful travel and towing support from Gooty, Andhra Pradesh. Tell us where you're headed — we'll help you take the next step.</p><div className="hero-actions"><a className="button button-dark" href="#fleet">Explore the fleet <ArrowDownRight size={17} /></a><a className="hero-text-link" href="#booking">Plan a trip <ArrowUpRight size={15} /></a></div></div>
         <div className="hero-side-note"><span>EST. IN GOOTY</span><i /> <span>TRAVEL · TOWING · CARE</span></div>
