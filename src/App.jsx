@@ -129,7 +129,7 @@ export default function App() {
       </div>
     </section>
     <section className="fleet-story" aria-label="Explore our fleet">
-      <Reveal className="fleet-story-heading"><span>OUR FLEET</span><h2>Comfortable. Reliable. Ready for every journey.</h2><p>Enquiry only · availability confirmed by our team</p></Reveal>
+      <Reveal className="fleet-story-heading"><span>OUR FLEET</span><h2>Comfortable. Reliable. Ready for every journey.</h2><p>Enquiry only · availability confirmed by our team</p><div className="experience-stats"><div><strong>07</strong><span>Fleet options</span></div><div><strong>02</strong><span>Enquiry types</span></div><div><strong>01</strong><span>Local base</span></div></div></Reveal>
       <div className="fleet-story-track">
         {vehicles.map((item, index) => <article className="fleet-story-card" key={item.id} data-reveal style={{ "--card-index": index }}>
           <div className="fleet-story-image"><img src={item.image} alt={item.name} loading="lazy" decoding="async" /></div>
