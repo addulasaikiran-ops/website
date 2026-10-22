@@ -1,4 +1,11 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import ScrollRig from './ScrollRig.jsx';
+import Reveal from './Reveal.jsx';
+import Preloader from './Preloader.jsx';
+import ExperienceChrome from './ExperienceChrome.jsx';
+import SplitText from './SplitText.jsx';
+import { sceneMotion } from './motionConfig.js';
+const Scene = lazy(() => import('./Scene.jsx'));
 import { ArrowLeft, ArrowRight, CalendarDays, CarFront, Clock3, Fuel, MapPin, Phone, Snowflake, Users, UserRound, BriefcaseBusiness, Truck, MessageCircle, ChevronDown } from 'lucide-react';
 import { business, fleet, towing } from './data.js';
 
@@ -7,10 +14,13 @@ const waLink = (message) => `https://wa.me/${business.phone}?text=${encodeURICom
 
 export default function App() {
   const [active, setActive] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const finishLoading = useCallback(() => setLoading(false), []);
   const [mode, setMode] = useState('trip');
   const [form, setForm] = useState({ pickup: '', destination: '', date: '', time: '', name: '', phone: '' });
   const [notice, setNotice] = useState('');
   const vehicle = vehicles[active];
+  useEffect(() => { sceneMotion.activeVehicle = active; }, [active]);
 
   // Keep the current vehicle eager, then warm up adjacent images for faster switching.
   useEffect(() => {
@@ -58,6 +68,10 @@ export default function App() {
   const next = () => chooseVehicle((active + 1) % vehicles.length);
 
   return <main className="premium-page">
+    {loading && <Preloader onComplete={finishLoading} />}
+    <ExperienceChrome />
+    <ScrollRig />
+    <Suspense fallback={<div className="scene-static-glow" aria-hidden="true" />}><Scene /></Suspense>
     <div className="scenic-backdrop" aria-hidden="true" />
     <div className="backdrop-tint" aria-hidden="true" />
     <header className="premium-header">
@@ -105,7 +119,7 @@ export default function App() {
       </section>
 
       <div className="premium-vehicle-info">
-        <div className="vehicle-title-block" key={vehicle.id}><span className="vehicle-count-label">{String(active + 1).padStart(2, '0')} / 07</span><p>{isTow ? 'ROADSIDE SUPPORT' : vehicle.name.split(' ').slice(0, -1).join(' ').toUpperCase()}</p><h1>{isTow ? 'TOWING SUPPORT' : vehicle.name.split(' ').slice(-1)[0].toUpperCase()}</h1><span className="gold-underline" /><div className="vehicle-tagline">{isTow ? 'Help when you need it. Support for the road ahead.' : 'Comfortable. Reliable. Ready for every journey.'}</div></div>
+        <div className="vehicle-title-block" key={vehicle.id}><span className="vehicle-count-label">{String(active + 1).padStart(2, '0')} / 07</span><p>{isTow ? 'ROADSIDE SUPPORT' : vehicle.name.split(' ').slice(0, -1).join(' ').toUpperCase()}</p><h1><SplitText text={isTow ? 'TOWING SUPPORT' : vehicle.name.split(' ').slice(-1)[0].toUpperCase()} /></h1><span className="gold-underline" /><div className="vehicle-tagline">{isTow ? 'Help when you need it. Support for the road ahead.' : 'Comfortable. Reliable. Ready for every journey.'}</div></div>
         <div className="vehicle-specs" key={`specs-${vehicle.id}`}>
           <div><Users /><strong>{isTow ? 'On call' : '5–7'}</strong><span>{isTow ? 'Assistance' : 'Seater*'}</span></div>
           <div><Fuel /><strong>{isTow ? 'Recovery' : 'Petrol / Diesel'}</strong><span>{isTow ? 'Support' : 'Fuel type*'}</span></div>
@@ -113,6 +127,15 @@ export default function App() {
           <div><BriefcaseBusiness /><strong>{isTow ? 'Help' : 'Luggage'}</strong><span>For the trip</span></div>
         </div>
         <div className="vehicle-controls"><button onClick={previous} aria-label="Previous vehicle"><ArrowLeft /></button><a href="#enquiry">View Details <ArrowRight size={15} /></a><button onClick={next} aria-label="Next vehicle"><ArrowRight /></button></div>
+      </div>
+    </section>
+    <section className="fleet-story" aria-label="Explore our fleet">
+      <Reveal className="fleet-story-heading"><span>OUR FLEET</span><h2>Comfortable. Reliable. Ready for every journey.</h2><p>Enquiry only · availability confirmed by our team</p><div className="experience-stats"><div><strong>07</strong><span>Fleet options</span></div><div><strong>02</strong><span>Enquiry types</span></div><div><strong>01</strong><span>Local base</span></div></div></Reveal>
+      <div className="fleet-story-track">
+        {vehicles.map((item, index) => <article className="fleet-story-card" key={item.id} data-reveal style={{ "--card-index": index }}>
+          <div className="fleet-story-image"><img src={item.image} alt={item.name} loading="lazy" decoding="async" /></div>
+          <div className="fleet-story-copy"><span>{String(index + 1).padStart(2, "0")} / 07</span><h3>{item.name}</h3><p>{item.description || item.note || "Help when you need it. Support for the road ahead."}</p><button type="button" onClick={() => { chooseVehicle(index); document.querySelector("#enquiry")?.scrollIntoView({ behavior: "smooth", block: "center" }); }}>Enquire about this vehicle <ArrowRight size={16} /></button></div>
+        </article>)}
       </div>
     </section>
     <footer className="premium-footer" id="about"><span>SRIRAM TRAVELS & TOWING SERVICES</span><span>*Vehicle specifications are indicative. Confirm details and availability with the team.</span><a href="https://www.google.com/maps/search/?api=1&query=Gooty+Andhra+Pradesh" target="_blank" rel="noreferrer">Gooty, Andhra Pradesh ↗</a></footer>
