@@ -1,6 +1,9 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import ScrollRig from './ScrollRig.jsx';
 import Reveal from './Reveal.jsx';
+import Preloader from './Preloader.jsx';
+import ExperienceChrome from './ExperienceChrome.jsx';
+import { sceneMotion } from './motionConfig.js';
 const Scene = lazy(() => import('./Scene.jsx'));
 import { ArrowLeft, ArrowRight, CalendarDays, CarFront, Clock3, Fuel, MapPin, Phone, Snowflake, Users, UserRound, BriefcaseBusiness, Truck, MessageCircle, ChevronDown } from 'lucide-react';
 import { business, fleet, towing } from './data.js';
@@ -10,10 +13,13 @@ const waLink = (message) => `https://wa.me/${business.phone}?text=${encodeURICom
 
 export default function App() {
   const [active, setActive] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const finishLoading = useCallback(() => setLoading(false), []);
   const [mode, setMode] = useState('trip');
   const [form, setForm] = useState({ pickup: '', destination: '', date: '', time: '', name: '', phone: '' });
   const [notice, setNotice] = useState('');
   const vehicle = vehicles[active];
+  useEffect(() => { sceneMotion.activeVehicle = active; }, [active]);
 
   // Keep the current vehicle eager, then warm up adjacent images for faster switching.
   useEffect(() => {
@@ -61,6 +67,8 @@ export default function App() {
   const next = () => chooseVehicle((active + 1) % vehicles.length);
 
   return <main className="premium-page">
+    {loading && <Preloader onComplete={finishLoading} />}
+    <ExperienceChrome />
     <ScrollRig />
     <Suspense fallback={<div className="scene-static-glow" aria-hidden="true" />}><Scene /></Suspense>
     <div className="scenic-backdrop" aria-hidden="true" />
