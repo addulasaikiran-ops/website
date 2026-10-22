@@ -138,6 +138,25 @@ export default function App() {
         </article>)}
       </div>
     </section>
+    <section className="services-reference" id="services">
+      <span className="section-kicker">04 / Services · Transit & assistance</span>
+      <h2>Everything for the <em>road.</em></h2>
+      <p className="section-intro">End-to-end transport rentals and roadside assistance for local travel, outstation journeys, station transfers, and vehicle recovery around Gooty.</p>
+      <div className="service-reference-grid">
+        <article className="service-reference-card"><span className="service-index">01 / LOCAL TRANSIT</span><div><h3>Local Taxi</h3><p>Point-to-point transfers around Gooty town, railway stations, and local hubs.</p></div><a href="#enquiry">Enquire for a ride ↗</a></article>
+        <article className="service-reference-card"><span className="service-index">02 / OUTSTATION</span><div><h3>Outstation Trips</h3><p>Ask about one-way and round-trip travel across Andhra Pradesh and beyond.</p></div><a href="#enquiry">Plan your trip ↗</a></article>
+        <article className="service-reference-card"><span className="service-index">03 / TRANSFERS</span><div><h3>Airport & Station Drop</h3><p>Arrange a pickup or drop-off with route and timing confirmed by our team.</p></div><a href="#enquiry">Arrange transfer ↗</a></article>
+        <article className="service-reference-card"><span className="service-index">04 / GROUP TRAVEL</span><div><h3>Family & Group Travel</h3><p>Tell us your passenger count and luggage needs so we can discuss a suitable vehicle.</p></div><a href="#fleet">Explore fleet ↗</a></article>
+        <article className="service-reference-card"><span className="service-index">05 / RECOVERY</span><div><h3>Vehicle Towing</h3><p>Contact us to enquire about towing and breakdown recovery assistance in the Gooty area.</p></div><a href="#towing">Get towing help ↗</a></article>
+        <article className="service-reference-card"><span className="service-index">06 / ROADSIDE HELP</span><div><h3>Breakdown Assistance</h3><p>Call directly to explain your location and the help your vehicle needs.</p></div><a href="#towing">Call for assistance ↗</a></article>
+      </div>
+    </section>
+    <section className="towing-reference" id="towing">
+      <div className="towing-reference-inner">
+        <div><span className="section-kicker">03 / Towing · Roadside support</span><h2>Stuck on the road?<br/><em>One call away.</em></h2><p>For towing or breakdown assistance, call Sriram Travels & Towing Services in Gooty. Share your current location and vehicle details so the team can confirm availability and response.</p></div>
+        <div className="towing-call-panel"><span className="section-kicker">DIRECT DISPATCH HOTLINE</span><strong>{business.phoneDisplay}</strong><a href={`tel:+${business.phone}`}><Phone size={18}/> Call for assistance</a><p>{business.address}</p><a href={waLink('Hello Sriram Travels & Towing Services, I need towing or roadside assistance. My current location is: ')} target="_blank" rel="noreferrer"><MessageCircle size={18}/> WhatsApp enquiry</a></div>
+      </div>
+    </section>
     <footer className="premium-footer" id="about"><span>SRIRAM TRAVELS & TOWING SERVICES</span><span>*Vehicle specifications are indicative. Confirm details and availability with the team.</span><a href="https://www.google.com/maps/search/?api=1&query=Gooty+Andhra+Pradesh" target="_blank" rel="noreferrer">Gooty, Andhra Pradesh ↗</a></footer>
   </main>;
 }
