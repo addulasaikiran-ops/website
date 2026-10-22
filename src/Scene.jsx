@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, MeshDistortMaterial } from '@react-three/drei';
+import { Float, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { motionConfig, sceneMotion } from './motionConfig.js';
 
@@ -33,7 +33,7 @@ function HeroObject() {
   </group>;
 }
 function SceneContent() {
-  return <><ambientLight intensity={0.9} /><directionalLight position={[4, 5, 5]} intensity={2.4} color="#fff1d4" /><pointLight position={[-4, -2, 2]} intensity={1.8} color="#7b9fc8" /><Suspense fallback={null}><HeroObject /><Environment preset="city" /></Suspense></>;
+  return <><ambientLight intensity={0.9} /><directionalLight position={[4, 5, 5]} intensity={2.4} color="#fff1d4" /><pointLight position={[-4, -2, 2]} intensity={1.8} color="#7b9fc8" /><Suspense fallback={null}><HeroObject /></Suspense></>;
 }
 export default function Scene() {
   const mobile = typeof window !== 'undefined' && window.innerWidth < motionConfig.performance.mobileBreakpoint;
