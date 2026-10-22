@@ -107,11 +107,11 @@
 .preloader-track span{display:block;height:100%;background:linear-gradient(90deg,#b98531,#ffe1a0)}
 .preloader-progress{font-size:9px;letter-spacing:1.5px;color:var(--gold-light);font-variant-numeric:tabular-nums}
 .scroll-progress-track{position:fixed;top:0;left:0;right:0;height:2px;z-index:150;background:rgba(255,255,255,.08);pointer-events:none}
-.scroll-progress-track span{display:block;width:calc(var(--page-progress,0)*100%);height:100%;background:linear-gradient(90deg,#c58b30,#ffe3a0);box-shadow:0 0 12px rgba(232,182,83,.6)}
+.scroll-progress-track span{display:block;width:var(--page-progress,0%);height:100%;background:linear-gradient(90deg,#c58b30,#ffe3a0);box-shadow:0 0 12px rgba(232,182,83,.6)}
 .roadline-drawing{position:fixed;z-index:0;right:2.2%;top:16%;width:44px;height:68vh;opacity:.32;pointer-events:none;overflow:visible}
 .roadline-drawing path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .roadline-shadow{stroke:rgba(232,182,83,.12);stroke-width:5}
-.roadline-stroke{stroke:#e8b653;stroke-width:1.5;stroke-dasharray:1000;stroke-dashoffset:calc(1000 - var(--page-progress,0)*1000);filter:drop-shadow(0 0 3px rgba(232,182,83,.4))}
+.roadline-stroke{stroke:#e8b653;stroke-width:1.5;stroke-dasharray:1000;stroke-dashoffset:calc(1000 - var(--page-progress-number,0)*1000);filter:drop-shadow(0 0 3px rgba(232,182,83,.4))}
 .floating-contact{position:fixed;z-index:80;right:22px;bottom:24px;display:flex;flex-direction:column;gap:9px}
 .floating-contact a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:45px;padding:0 15px;border:1px solid rgba(255,255,255,.23);border-radius:99px;background:rgba(7,22,37,.84);box-shadow:0 10px 30px rgba(0,0,0,.22);backdrop-filter:blur(15px);font-size:11px;font-weight:700;transition:transform .25s,border-color .25s,background .25s}
 .floating-contact a:first-child svg{color:var(--gold-light)}
@@ -139,3 +139,8 @@
 @media(max-width:560px){.floating-contact{right:12px;bottom:12px;flex-direction:row;gap:7px}.floating-contact a{min-height:43px;padding:0 12px;font-size:10px}.floating-contact svg{width:15px}.experience-stats{gap:25px;margin-top:24px}.experience-stats span{font-size:9px}.preloader-name{font-size:17px}.roadline-drawing{display:none}}
 @media(pointer:fine){body:has(.custom-cursor.is-visible),body:has(.custom-cursor.is-visible) a,body:has(.custom-cursor.is-visible) button{cursor:none}}
 @media(prefers-reduced-motion:reduce){.custom-cursor,.roadline-drawing{display:none}.brand-preloader{transition:none}.fleet-story-track{transform:none!important;scroll-behavior:auto}.floating-contact a,.fleet-story-card,.premium-notice{animation:none!important;transition:none!important}}
+
+@keyframes stat-rise{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.experience-stats>div{animation:stat-rise .7s both;animation-delay:calc(var(--stat-index,0)*90ms)}
+.experience-stats>div:nth-child(2){--stat-index:1}.experience-stats>div:nth-child(3){--stat-index:2}
+@media(prefers-reduced-motion:reduce){.experience-stats>div{animation:none}}
