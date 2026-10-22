@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import ScrollRig from './ScrollRig.jsx';
+import Reveal from './Reveal.jsx';
 const Scene = lazy(() => import('./Scene.jsx'));
 import { ArrowLeft, ArrowRight, CalendarDays, CarFront, Clock3, Fuel, MapPin, Phone, Snowflake, Users, UserRound, BriefcaseBusiness, Truck, MessageCircle, ChevronDown } from 'lucide-react';
 import { business, fleet, towing } from './data.js';
@@ -120,7 +121,7 @@ export default function App() {
       </div>
     </section>
     <section className="fleet-story" aria-label="Explore our fleet">
-      <div className="fleet-story-heading" data-reveal><span>THE JOURNEY, YOUR WAY</span><h2>Ready for the road ahead.</h2><p>Comfortable. Reliable. Ready for every journey.</p></div>
+      <Reveal className="fleet-story-heading"><span>THE JOURNEY, YOUR WAY</span><h2>Ready for the road ahead.</h2><p>Comfortable. Reliable. Ready for every journey.</p></Reveal>
       <div className="fleet-story-track">
         {vehicles.map((item, index) => <article className="fleet-story-card" key={item.id} data-reveal style={{ "--card-index": index }}>
           <div className="fleet-story-image"><img src={item.image} alt={item.name} loading="lazy" decoding="async" /></div>
