@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import ScrollRig from './ScrollRig.jsx';
+const Scene = lazy(() => import('./Scene.jsx'));
 import { ArrowLeft, ArrowRight, CalendarDays, CarFront, Clock3, Fuel, MapPin, Phone, Snowflake, Users, UserRound, BriefcaseBusiness, Truck, MessageCircle, ChevronDown } from 'lucide-react';
 import { business, fleet, towing } from './data.js';
 
@@ -58,6 +60,8 @@ export default function App() {
   const next = () => chooseVehicle((active + 1) % vehicles.length);
 
   return <main className="premium-page">
+    <ScrollRig />
+    <Suspense fallback={<div className="scene-static-glow" aria-hidden="true" />}><Scene /></Suspense>
     <div className="scenic-backdrop" aria-hidden="true" />
     <div className="backdrop-tint" aria-hidden="true" />
     <header className="premium-header">
@@ -113,6 +117,15 @@ export default function App() {
           <div><BriefcaseBusiness /><strong>{isTow ? 'Help' : 'Luggage'}</strong><span>For the trip</span></div>
         </div>
         <div className="vehicle-controls"><button onClick={previous} aria-label="Previous vehicle"><ArrowLeft /></button><a href="#enquiry">View Details <ArrowRight size={15} /></a><button onClick={next} aria-label="Next vehicle"><ArrowRight /></button></div>
+      </div>
+    </section>
+    <section className="fleet-story" aria-label="Explore our fleet">
+      <div className="fleet-story-heading" data-reveal><span>THE JOURNEY, YOUR WAY</span><h2>Ready for the road ahead.</h2><p>Comfortable. Reliable. Ready for every journey.</p></div>
+      <div className="fleet-story-track">
+        {vehicles.map((item, index) => <article className="fleet-story-card" key={item.id} data-reveal style={{ "--card-index": index }}>
+          <div className="fleet-story-image"><img src={item.image} alt={item.name} loading="lazy" decoding="async" /></div>
+          <div className="fleet-story-copy"><span>{String(index + 1).padStart(2, "0")} / 07</span><h3>{item.name}</h3><p>{item.description || item.note || "Help when you need it. Support for the road ahead."}</p><button type="button" onClick={() => { chooseVehicle(index); document.querySelector("#enquiry")?.scrollIntoView({ behavior: "smooth", block: "center" }); }}>Enquire about this vehicle <ArrowRight size={16} /></button></div>
+        </article>)}
       </div>
     </section>
     <footer className="premium-footer" id="about"><span>SRIRAM TRAVELS & TOWING SERVICES</span><span>*Vehicle specifications are indicative. Confirm details and availability with the team.</span><a href="https://www.google.com/maps/search/?api=1&query=Gooty+Andhra+Pradesh" target="_blank" rel="noreferrer">Gooty, Andhra Pradesh ↗</a></footer>
