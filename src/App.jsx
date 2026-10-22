@@ -3,6 +3,7 @@ import ScrollRig from './ScrollRig.jsx';
 import Reveal from './Reveal.jsx';
 import Preloader from './Preloader.jsx';
 import ExperienceChrome from './ExperienceChrome.jsx';
+import SplitText from './SplitText.jsx';
 import { sceneMotion } from './motionConfig.js';
 const Scene = lazy(() => import('./Scene.jsx'));
 import { ArrowLeft, ArrowRight, CalendarDays, CarFront, Clock3, Fuel, MapPin, Phone, Snowflake, Users, UserRound, BriefcaseBusiness, Truck, MessageCircle, ChevronDown } from 'lucide-react';
@@ -118,7 +119,7 @@ export default function App() {
       </section>
 
       <div className="premium-vehicle-info">
-        <div className="vehicle-title-block" key={vehicle.id}><span className="vehicle-count-label">{String(active + 1).padStart(2, '0')} / 07</span><p>{isTow ? 'ROADSIDE SUPPORT' : vehicle.name.split(' ').slice(0, -1).join(' ').toUpperCase()}</p><h1>{isTow ? 'TOWING SUPPORT' : vehicle.name.split(' ').slice(-1)[0].toUpperCase()}</h1><span className="gold-underline" /><div className="vehicle-tagline">{isTow ? 'Help when you need it. Support for the road ahead.' : 'Comfortable. Reliable. Ready for every journey.'}</div></div>
+        <div className="vehicle-title-block" key={vehicle.id}><span className="vehicle-count-label">{String(active + 1).padStart(2, '0')} / 07</span><p>{isTow ? 'ROADSIDE SUPPORT' : vehicle.name.split(' ').slice(0, -1).join(' ').toUpperCase()}</p><h1><SplitText text={isTow ? 'TOWING SUPPORT' : vehicle.name.split(' ').slice(-1)[0].toUpperCase()} /></h1><span className="gold-underline" /><div className="vehicle-tagline">{isTow ? 'Help when you need it. Support for the road ahead.' : 'Comfortable. Reliable. Ready for every journey.'}</div></div>
         <div className="vehicle-specs" key={`specs-${vehicle.id}`}>
           <div><Users /><strong>{isTow ? 'On call' : '5–7'}</strong><span>{isTow ? 'Assistance' : 'Seater*'}</span></div>
           <div><Fuel /><strong>{isTow ? 'Recovery' : 'Petrol / Diesel'}</strong><span>{isTow ? 'Support' : 'Fuel type*'}</span></div>
