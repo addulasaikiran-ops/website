@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { ContactShadows, Environment, Float } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
@@ -64,15 +64,17 @@ function SceneContent({ mobile }) {
 }
 
 export default function Scene() {
-  const [mobile, setMobile] = [typeof window !== 'undefined' && window.innerWidth < motionConfig.performance.mobileBreakpoint, () => {}];
+  const [mobile, setMobile] = useState(typeof window !== 'undefined' && window.innerWidth < motionConfig.performance.mobileBreakpoint);
   const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   useEffect(() => {
+    const onResize = () => setMobile(window.innerWidth < motionConfig.performance.mobileBreakpoint);
+    window.addEventListener('resize', onResize, { passive: true });
     const onPointer = (event) => {
       sceneMotion.pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
       sceneMotion.pointerY = (0.5 - event.clientY / window.innerHeight) * 2;
     };
     if (!mobile && !reduced) window.addEventListener('pointermove', onPointer, { passive: true });
-    return () => window.removeEventListener('pointermove', onPointer);
+    return () => { window.removeEventListener('pointermove', onPointer); window.removeEventListener('resize', onResize); };
   }, [mobile, reduced]);
   if (reduced) return <div className="scene-static-glow" aria-hidden="true" />;
   return <div className={`scene-canvas ${mobile ? 'scene-canvas-mobile' : ''}`} aria-hidden="true">
