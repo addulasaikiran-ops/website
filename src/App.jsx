@@ -24,7 +24,7 @@ function Header() {
       <a onClick={() => setMenuOpen(false)} href="#contact">Contact</a>
     </nav>
     <a className="header-cta" href="#booking">Plan a journey <ArrowUpRight size={15} /></a>
-    <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}>{menuOpen ? <X /> : <Menu />}</button>
+    <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
   </header>;
 }
 
@@ -39,7 +39,7 @@ function FleetSidebar({ active, progress, onSelect }) {
         {active === index && <ChevronRight size={15} className="nav-arrow" />}
       </button>)}
     </div>
-    <div className="sidebar-bottom"><span>SCROLL TO EXPLORE</span><div className="progress-track"><i style={{ height: `${progress}%` }} /></div><span className="progress-value">{String(Math.round(progress)).padStart(2, '0')}%</span></div>
+    <div className="sidebar-bottom"><span>SCROLL TO EXPLORE</span><div className="progress-track"><i style={{ width: `${progress}%` }} /></div><span className="progress-value">{String(Math.round(progress)).padStart(2, '0')}%</span></div>
   </aside>;
 }
 
